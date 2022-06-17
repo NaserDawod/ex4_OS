@@ -7,20 +7,24 @@
 
 
 void sigHandler(int sig) {
+    printf("fuck ");
     int pid = getpid();
     char clientPid[10], clientFile[40];
     sprintf(clientPid, "%d", pid);
     strcpy(clientFile, "to_client_");
     strcat(clientFile, clientPid);
     int fd = open(clientFile, 'r');
+    if (fd < 0) {
+        printf("fuck work\n");
+    }
     char answer[100], c;
     int i;
     for (i = 0; read(fd, &c, 1) > 0; ++i) {
         answer[i] = c;
     }
-    answer[i-1] = 0;
+    answer[i] = 0;
     close(fd);
-    remove(clientFile);
+    // remove(clientFile);
     printf("%s\n", answer);
 }
 

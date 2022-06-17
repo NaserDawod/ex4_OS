@@ -13,3 +13,9 @@ process_id=`ps -s $COMMAND| grep "./[s]erver" | awk '{print $2}'`
 ./client $process_id 1 1 4 &
 
 ./client $process_id 2 3 2 &
+
+./client $process_id 6 4 2 &
+
+./client $process_id 5 3 5 &
+
+./client $process_id 1000 1 20 &
