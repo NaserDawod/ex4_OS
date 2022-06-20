@@ -7,7 +7,6 @@
 
 
 void sigHandler(int sig) {
-    printf("fuck ");
     int pid = getpid();
     char clientPid[10], clientFile[40];
     sprintf(clientPid, "%d", pid);
@@ -15,7 +14,7 @@ void sigHandler(int sig) {
     strcat(clientFile, clientPid);
     int fd = open(clientFile, 'r');
     if (fd < 0) {
-        printf("fuck work\n");
+        return;
     }
     char answer[100], c;
     int i;
@@ -24,7 +23,7 @@ void sigHandler(int sig) {
     }
     answer[i] = 0;
     close(fd);
-    // remove(clientFile);
+    remove(clientFile);
     printf("%s\n", answer);
 }
 
@@ -60,8 +59,9 @@ int main(int argc, char** argv) {
     char clientPid[10];
     sprintf(clientPid, "%d", pid);
     int serverPid = atoi(argv[1]);
+    int i;
     alarm(30);
-    for (int i = 0; i < 10; ++i) {
+    for (i = 0; i < 10; ++i) {
         int fd = open("to_srv", O_CREAT | O_EXCL | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
         if (fd < 0) {
             waiting = (rand() % 5) + 1;

@@ -27,8 +27,8 @@ void clientHandler(int sig) {
             exit(0);
         }
         char input[100], c;
-        int num1, num2, operation, clientPid, pidLen;
-        for (int i = 0; read(fd, &c, 1) > 0 ; ++i) {
+        int num1, num2, operation, clientPid, pidLen, i;
+        for (i = 0; read(fd, &c, 1) > 0 ; ++i) {
             input[i] = c;
         }
         close(fd);
